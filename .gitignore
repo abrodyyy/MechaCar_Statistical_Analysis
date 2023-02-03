@@ -130,3 +130,6 @@ dmypy.json
 .Rproj.user
 .vscode/settings.json
 MechaCar_Statistical_Analysis.Rproj
+.RData
+.gitignore
+.Rhistory
