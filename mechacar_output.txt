@@ -1,0 +1,337 @@
+ # File name of output log
+my_log <- file("mechacar_output.txt")
+# Writing console output to log file
+sink(my_log, append = TRUE, type = "output")
+sink(my_log, append = TRUE, type = "message")
+# Writing currently opened R script to file
+cat(readChar(rstudioapi::getSourceEditorContext()$path,
+             file.info(rstudioapi::getSourceEditorContext()$path)$size))
+
+## Deliverable 1: Linear Regression to Predict MPG
+
+# Use the library() function to load the dplyr package.
+library(dplyr)
+
+# Import and read in the MechaCar_mpg.csv file as a dataframe
+mecha_car_df <- read.csv("Resources/MechaCar_mpg.csv",
+check.names = FALSE, stringsAsFactors = FALSE)
+mecha_car_df
+# Perform linear regression using the lm() function.
+# In the lm() function, pass in all six variables and add the dataframe.
+lm(mpg ~ vehicle_length + vehicle_weight + spoiler_angle
+ + ground_clearance + AWD, data = mecha_car_df)
+
+# Using the summary() function, determine the p-value and the r-squared
+# value for the linear regression model.
+summary(lm(mpg ~ vehicle_length + vehicle_weight + spoiler_angle
++ ground_clearance + AWD, data = mecha_car_df))
+
+## Part 2: Create Visualizations for the Trip Analysis
+# Use the library() function to load the dplyr package.
+library(dplyr)
+# Import and read in the Suspension_Coil.csv file as a table.
+suspension_coil_table <- read.csv("Resources/Suspension_Coil.csv",
+check.names = FALSE, stringsAsFactors = FALSE)
+suspension_coil_table
+# Create a total_summary dataframe.
+# Get summary statistics for the suspension coil’s PSI column.
+total_summary_df <- suspension_coil_table %>%
+  summarize(Mean = mean(PSI),
+            Medain = median(PSI),
+            Variance = var(PSI),
+            SD = sd(PSI), .groups = "keep")
+View(total_summary_df)
+# Create a lot_summary dataframe.
+# Get summary statistics for the suspension coil’s PSI column.
+lot_summary_df <- suspension_coil_table %>%
+  group_by(Manufacturing_Lot) %>%
+  summarize(Mean = mean(PSI),
+            Medain = median(PSI),
+            Variance = var(PSI),
+            SD = sd(PSI), .groups = "keep")
+View(lot_summary_df)
+
+# Close connection to log file
+closeAllConnections()   vehicle_length vehicle_weight spoiler_angle ground_clearance AWD      mpg
+1        14.69710       6407.946      48.78998        14.640983   1 49.04918
+2        12.53421       5182.081      90.00000        14.366679   1 36.76606
+3        20.00000       8337.981      78.63232        12.253711   0 80.00000
+4        13.42849       9419.671      55.93903        12.989359   1 18.94149
+5        15.44998       3772.667      26.12816        15.103963   1 63.82457
+6        14.45357       7286.595      30.58568        13.106953   0 48.54268
+7        14.10599       4989.992      84.27743         9.371836   0 36.39513
+8        15.45398       5429.760      75.32817        16.190957   1 63.05322
+9        14.52506       7122.962      67.76457        11.230907   1 27.20300
+10       15.47860       5554.791      56.90882        10.921334   1 48.12008
+11       14.76931       5683.381      38.83529        12.231921   0 32.55047
+12       14.31984       5981.229      81.64859        12.972264   0 50.34986
+13       14.68376       6303.183      62.37546        11.636574   0 39.16441
+14       14.12852      10000.000      59.64194        13.125749   1 43.51063
+15       18.59062       4182.724      55.48771        14.459680   0 59.15592
+16       12.88955       5574.425      66.37692        15.072536   1 42.41892
+17       15.11266       4943.257      38.31901        15.158800   1 46.50623
+18       12.91614       7722.624      50.32062        11.640040   0 31.45088
+19       13.27291       7605.956      60.33572        17.731068   0 55.44374
+20       12.36809       3246.389      69.03763        14.306149   0 38.72442
+21       18.06819       3953.396      67.57736        13.160739   0 70.73307
+22       14.99541       5858.383      66.44288         8.802440   1 37.86970
+23       12.58444       7052.962      63.41534         9.578795   1 10.00000
+24       14.45503       5674.915      89.76752         9.723295   0 29.98104
+25       13.60483       3841.697      65.70445        11.044194   1 24.16231
+26       16.41548       2000.000      68.84479         8.620655   1 25.34868
+27       18.35135       2934.917      68.74393         9.803953   1 69.36129
+28       15.82988       3470.406      46.50228        14.386296   0 47.79270
+29       13.53728       9450.387      50.97371        14.814077   1 47.81199
+30       12.46096       4691.651      44.06756        13.568435   0 26.56352
+31       14.73256       6701.508      73.10157        12.109994   0 41.69385
+32       16.96734       6155.749      58.31362        11.287275   1 51.80616
+33       18.07294       6203.635      76.88427        11.591889   1 43.19019
+34       12.74533       9671.599      78.30310        14.507314   0 51.24755
+35       16.05539       4491.870      59.46005         9.104129   1 28.30198
+36       12.00000       6255.318       0.00000        18.000000   0 41.05162
+37       13.67225       8129.072      85.78628        12.629416   0 43.29014
+38       13.23373       5876.151      23.92351        12.144043   1 25.13951
+39       13.25051       5405.188      47.78468         9.773404   0 32.26039
+40       16.83809       5862.235      56.14336        16.403553   1 73.28485
+41       13.78198       6409.311      40.02585        13.560939   1 36.96890
+42       17.52585       5404.056      58.77936        13.310631   0 49.67550
+43       19.73430       7711.498      20.54341        10.358993   1 63.46681
+44       16.55918       8354.279      50.59282        12.338203   1 67.76351
+45       14.13565       4438.014      85.16064        14.745929   0 56.80763
+46       15.64368       8854.568      27.67402        14.758095   0 74.71472
+47       13.67633       8679.591      43.68506        14.030788   0 48.69874
+48       19.17453       7577.647      57.84327         6.000000   0 55.93975
+49       14.33405       5296.306      54.49772        16.971517   0 40.58563
+50       15.36573       6553.449      28.55171        10.067357   1 29.74725
+
+Call:
+lm(formula = mpg ~ vehicle_length + vehicle_weight + spoiler_angle + 
+    ground_clearance + AWD, data = mecha_car_df)
+
+Coefficients:
+     (Intercept)    vehicle_length    vehicle_weight     spoiler_angle  ground_clearance               AWD  
+      -1.040e+02         6.267e+00         1.245e-03         6.877e-02         3.546e+00        -3.411e+00  
+
+
+Call:
+lm(formula = mpg ~ vehicle_length + vehicle_weight + spoiler_angle + 
+    ground_clearance + AWD, data = mecha_car_df)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-19.4701  -4.4994  -0.0692   5.4433  18.5849 
+
+Coefficients:
+                   Estimate Std. Error t value Pr(>|t|)    
+(Intercept)      -1.040e+02  1.585e+01  -6.559 5.08e-08 ***
+vehicle_length    6.267e+00  6.553e-01   9.563 2.60e-12 ***
+vehicle_weight    1.245e-03  6.890e-04   1.807   0.0776 .  
+spoiler_angle     6.877e-02  6.653e-02   1.034   0.3069    
+ground_clearance  3.546e+00  5.412e-01   6.551 5.21e-08 ***
+AWD              -3.411e+00  2.535e+00  -1.346   0.1852    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 8.774 on 44 degrees of freedom
+Multiple R-squared:  0.7149,	Adjusted R-squared:  0.6825 
+F-statistic: 22.07 on 5 and 44 DF,  p-value: 5.35e-11
+
+    VehicleID Manufacturing_Lot  PSI
+1      V40858              Lot1 1499
+2      V40607              Lot1 1500
+3      V31443              Lot1 1500
+4       V6004              Lot1 1500
+5       V7000              Lot1 1501
+6      V17344              Lot1 1501
+7      V37049              Lot1 1500
+8       V9048              Lot1 1499
+9      V40947              Lot1 1501
+10      V4682              Lot1 1500
+11     V35167              Lot1 1500
+12     V20839              Lot1 1498
+13      V1763              Lot1 1500
+14      V7915              Lot1 1499
+15     V24283              Lot1 1500
+16     V14310              Lot1 1500
+17     V48331              Lot1 1502
+18     V24679              Lot1 1499
+19     V26894              Lot1 1498
+20     V42152              Lot1 1501
+21       V213              Lot1 1500
+22      V4312              Lot1 1499
+23     V34599              Lot1 1501
+24      V5945              Lot1 1500
+25     V45341              Lot1 1498
+26     V11514              Lot1 1499
+27      V2168              Lot1 1501
+28     V22022              Lot1 1499
+29     V39970              Lot1 1499
+30     V25197              Lot1 1502
+31      V8438              Lot1 1500
+32     V14229              Lot1 1502
+33       V493              Lot1 1501
+34     V16491              Lot1 1500
+35      V1037              Lot1 1500
+36     V11948              Lot1 1500
+37     V34990              Lot1 1500
+38     V10773              Lot1 1501
+39     V41106              Lot1 1500
+40     V37342              Lot1 1501
+41     V23497              Lot1 1500
+42     V47918              Lot1 1499
+43     V24631              Lot1 1499
+44     V44338              Lot1 1500
+45      V6203              Lot1 1499
+46     V41780              Lot1 1500
+47     V25772              Lot1 1501
+48     V33072              Lot1 1501
+49      V9609              Lot1 1501
+50     V17444              Lot1 1499
+51      V2937              Lot2 1499
+52     V33662              Lot2 1501
+53     V35897              Lot2 1499
+54     V40383              Lot2 1500
+55     V31118              Lot2 1505
+56     V49231              Lot2 1499
+57     V16893              Lot2 1502
+58     V19636              Lot2 1500
+59     V24531              Lot2 1499
+60     V29702              Lot2 1497
+61     V27432              Lot2 1499
+62     V41076              Lot2 1494
+63     V31174              Lot2 1496
+64     V21322              Lot2 1498
+65     V27412              Lot2 1498
+66     V13774              Lot2 1502
+67     V45883              Lot2 1504
+68     V29723              Lot2 1498
+69      V8872              Lot2 1500
+70      V3320              Lot2 1498
+71     V18858              Lot2 1501
+72      V9531              Lot2 1500
+73     V44685              Lot2 1501
+74     V12054              Lot2 1502
+75     V16182              Lot2 1501
+76     V14013              Lot2 1499
+77      V9627              Lot2 1505
+78     V41360              Lot2 1505
+79       V924              Lot2 1500
+80     V47525              Lot2 1504
+81     V31495              Lot2 1500
+82     V38509              Lot2 1503
+83     V17834              Lot2 1495
+84     V20413              Lot2 1503
+85     V17502              Lot2 1504
+86     V40607              Lot2 1503
+87     V44576              Lot2 1500
+88     V35190              Lot2 1500
+89     V46374              Lot2 1500
+90     V47062              Lot2 1499
+91     V11605              Lot2 1496
+92     V14941              Lot2 1502
+93      V2942              Lot2 1501
+94     V32735              Lot2 1506
+95     V45208              Lot2 1501
+96     V40317              Lot2 1495
+97     V36280              Lot2 1497
+98     V31949              Lot2 1500
+99     V49281              Lot2 1499
+100    V34138              Lot2 1500
+101     V5908              Lot3 1503
+102     V9510              Lot3 1501
+103     V3092              Lot3 1496
+104    V49408              Lot3 1503
+105    V35127              Lot3 1496
+106    V27926              Lot3 1503
+107      V830              Lot3 1498
+108    V25929              Lot3 1499
+109    V45061              Lot3 1477
+110    V33860              Lot3 1499
+111    V27039              Lot3 1501
+112    V16942              Lot3 1495
+113     V1405              Lot3 1480
+114     V7785              Lot3 1502
+115    V39902              Lot3 1503
+116    V47785              Lot3 1491
+117    V42574              Lot3 1501
+118    V35633              Lot3 1542
+119    V38088              Lot3 1474
+120    V39133              Lot3 1498
+121     V8204              Lot3 1498
+122    V37577              Lot3 1515
+123    V30892              Lot3 1499
+124    V37654              Lot3 1503
+125    V12051              Lot3 1501
+126     V5504              Lot3 1495
+127    V15755              Lot3 1498
+128    V13224              Lot3 1499
+129    V46194              Lot3 1452
+130    V47096              Lot3 1458
+131     V9537              Lot3 1501
+132     V7763              Lot3 1500
+133    V41771              Lot3 1508
+134    V28453              Lot3 1483
+135    V21383              Lot3 1492
+136    V26143              Lot3 1489
+137    V38622              Lot3 1497
+138    V19109              Lot3 1485
+139    V32572              Lot3 1507
+140      V793              Lot3 1500
+141    V26325              Lot3 1499
+142    V42093              Lot3 1486
+143    V46047              Lot3 1498
+144    V17544              Lot3 1496
+145     V9896              Lot3 1496
+146    V20689              Lot3 1491
+147    V18191              Lot3 1494
+148    V39791              Lot3 1503
+149    V10053              Lot3 1499
+150    V45267              Lot3 1503
+
+	One Sample t-test
+
+data:  suspension_coil_table$PSI
+t = -1.8931, df = 149, p-value = 0.06028
+alternative hypothesis: true mean is not equal to 1500
+95 percent confidence interval:
+ 1497.507 1500.053
+sample estimates:
+mean of x 
+  1498.78 
+
+
+	One Sample t-test
+
+data:  lot1$PSI
+t = 0, df = 49, p-value = 1
+alternative hypothesis: true mean is not equal to 1500
+95 percent confidence interval:
+ 1499.719 1500.281
+sample estimates:
+mean of x 
+     1500 
+
+
+	One Sample t-test
+
+data:  lot2$PSI
+t = 0.51745, df = 49, p-value = 0.6072
+alternative hypothesis: true mean is not equal to 1500
+95 percent confidence interval:
+ 1499.423 1500.977
+sample estimates:
+mean of x 
+   1500.2 
+
+
+	One Sample t-test
+
+data:  lot3$PSI
+t = -2.0916, df = 49, p-value = 0.04168
+alternative hypothesis: true mean is not equal to 1500
+95 percent confidence interval:
+ 1492.431 1499.849
+sample estimates:
+mean of x 
+  1496.14 
+
