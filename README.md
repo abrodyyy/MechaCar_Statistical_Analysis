@@ -56,22 +56,28 @@ All Manufacturing Lots:
 ![Deliverable 3 (part 2)](https://user-images.githubusercontent.com/111623064/216589663-2a94cc80-7cd2-4dfd-b17e-60103d79e0e4.png)
 
 Individual Lots:
-- **Lot 1:**
-- **Lot 2:**
-- **Lot 3:**
+- **Lot 1:** Our p-value = 1, which is **higher** than our significance level. This leads us to determine that there is **not** sufficient evidence to reject our null hypothesis. In other words, the mean of lot 1 is statistically similar to the population mean of 1500.
+- **Lot 2:** Our p-value = 0.6072, which is **higher** than our significance level. This leads us to determine that there is **not** sufficient evidence to reject our null hypothesis. In other words, the mean of lot 2 is statistically similar to the population mean of 1500.
+- **Lot 3:** Our p-value = 0.04168, which is **lower** than our significance level. This leads us to determine that there **is** sufficient evidence to reject our null hypothesis. In other words, the mean of lot 3 is** statistically different** to the population mean of 1500.
 
 ## Deliverable 4: Study Design: MechaCar vs Competition
 
-Write a short description of a statistical study that can quantify how the MechaCar performs against the competition. In your study design, think critically about what metrics would be of interest to a consumer: for a few examples, cost, city or highway fuel efficiency, horse power, maintenance cost, or safety rating.
-
+The design below outlines a study that can be done to quantify how the MechaCar performs against the competition. 
 
 What metric or metrics are you going to test?
+- MSRP (manufacturer's suggested retail price)
+- Safety Rating
+- MPG (fuel efficiency) 
 
 
 What is the null hypothesis or alternative hypothesis?
-
+- Null Hypothesis: MechaCar's MSRP is comprable to it's competition based on safety rating and fuel efficiency. 
+- Alternate Hypothesis: MechaCar's  MSRP is NOT comprable to it's competition based on safety rating and fuel efficiency. 
 
 What statistical test would you use to test the hypothesis? And why?
-
+- A multiple linear regression model would be used to determine if Safety Rating and / or MPG (fuel efficiency) have an impact on MSRP. 
 
 What data is needed to run the statistical test?
+- MSRP data from MechaCar & it's top competitors
+- Safety data from MechaCar & it's top competitors
+- MPG data from MechaCar & it's top competitors
